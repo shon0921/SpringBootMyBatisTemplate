@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="kopo.poly.mapper.IUserInfoMapper">
+
+	<!-- 회원 가입 전 아이디 중복체크하기 -->
+	<select id="getUserIdExists" parameterType="UserInfoDTO" resultType="UserInfoDTO">
+		select
+		    if(count(USER_ID) > 0, 'Y', 'N') AS EXISTS_YN
+		from USER_INFO
+		WHERE USER_ID = #{userId}
+	</select>
+
+	<!-- 회원 가입 전 이메일 중복체크하기 -->
+	<select id="getEmailExists" parameterType="UserInfoDTO" resultType="UserInfoDTO">
+		select
+		    if(count(USER_ID) > 0, 'Y' 'N') as EXISTS_YN
+		from USER_INFO
+		where EMAIL = #{email}
+	</select>
+
+	<!--회원 가입하기(회원정보 등록하기) -->
+	<insert id="insertUserInfo" parameterType="UserInfoDTO">
+		insert into USER_INFO
+		(USER_ID, USER_NAME, PASSWORD, EMAIL, ADDR1, ADDR2, REG_ID, REG_DT, CHG_ID, CHG_DT)
+		value
+		(#{userId},#{userName},#{password},#{email},#{addr1},#{addr2},#{userId},NOW(),#{userId},NOW())
+	</insert>
+
+</mapper>
