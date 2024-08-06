@@ -15,7 +15,7 @@
 	<!-- 회원 가입 전 이메일 중복체크하기 -->
 	<select id="getEmailExists" parameterType="UserInfoDTO" resultType="UserInfoDTO">
 		select
-		    if(count(USER_ID) > 0, 'Y' 'N') as EXISTS_YN
+		    if(count(USER_ID) > 0, 'Y', 'N') as EXISTS_YN
 		from USER_INFO
 		where EMAIL = #{email}
 	</select>
@@ -28,4 +28,10 @@
 		(#{userId},#{userName},#{password},#{email},#{addr1},#{addr2},#{userId},NOW(),#{userId},NOW())
 	</insert>
 
+	<select id="getLogin" parameterType="UserInfoDTO" resultType="UserInfoDTO">
+		select USER_ID, USER_NAME, EMAIL
+		from USER_INFO
+		where USER_ID = #{userId}
+			and PASSWORD = #{password}
+	</select>
 </mapper>
