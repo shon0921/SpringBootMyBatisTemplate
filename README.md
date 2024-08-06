@@ -1,3 +1,3 @@
 # SpringBootMyBatisTemplate
 
-ppt 5장까지 완료 6장 30%
+ppt 7장까지 완료 8장 30%
