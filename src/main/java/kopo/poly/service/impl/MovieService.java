@@ -55,7 +55,7 @@ public class MovieService implements IMovieService {
         // JSOUP 라이브러리를 통해 사이트 접속되면, 그 사이트의 전체 HTML소스 저장할 변수
         Document doc;
 
-        // 사이트 접속(http프로토콜만 가능, https 프로토콜은 보안상 안됨)
+        // 사이트 접속(http프로토롱만 가능, https 프로토콜은 보안상 안됨)
         doc = Jsoup.connect(url).get();
 
         // CGV 웹페이지의 전체 소스 중 일부 태그를 선택하기 위해 사용
@@ -110,7 +110,21 @@ public class MovieService implements IMovieService {
 
     @Override
     public List<MovieDTO> getMovieInfo() throws Exception {
-        return null;
+
+        // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+        log.info("{}.getMovieInfo Start!", this.getClass().getName());
+
+        String collectTime = DateUtil.getDateTime("yyyyMMdd"); // 수집날짜 = 오늘 날짜
+
+        MovieDTO pDTO = new MovieDTO();
+        pDTO.setCollectTime(collectTime);
+
+        // DB에서 조회하기
+        List<MovieDTO> rList = movieMapper.getMovieInfo(pDTO);
+        // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+        log.info("{}.getMovieInfo End!", this.getClass().getName());
+
+        return rList;
     }
 
 

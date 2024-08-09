@@ -37,7 +37,7 @@ public class MailService implements IMailService {
 
         String toMail = CmmUtil.nvl(pDTO.getToMail());  // 받는 사람
         String title = CmmUtil.nvl(pDTO.getTitle());    // 메일 제목
-        String contents = CmmUtil.nvl(pDTO.getTitle()); //메일 제목
+        String contents = CmmUtil.nvl(pDTO.getContents()); //메일 내용
 
         log.info("toMail : " + toMail);
         log.info("title : " + title);
