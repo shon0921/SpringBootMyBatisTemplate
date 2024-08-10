@@ -6,11 +6,9 @@ import kopo.poly.dto.MsgDTO;
 import kopo.poly.dto.UserInfoDTO;
 import kopo.poly.service.IUserinfoService;
 import kopo.poly.util.CmmUtil;
-import kopo.poly.util.EncryptUtill;
+import kopo.poly.util.EncryptUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,7 +74,7 @@ public class UserInfoController {
         log.info("email : {}", email);
 
         UserInfoDTO pDTO = new UserInfoDTO();
-        pDTO.setEmail(EncryptUtill.encAES128CBC(email));
+        pDTO.setEmail(EncryptUtil.encAES128CBC(email));
 
         // 입력된 이메일이 중복된 이메일인지 조회
         UserInfoDTO rDTO = Optional.ofNullable(userInfoService.getEmailExists(pDTO)).orElseGet(UserInfoDTO::new);
@@ -144,10 +142,10 @@ public class UserInfoController {
             pDTO.setUserName(userName);
 
             //비밀번호는 절대로 복호화되지 않도록 해시 알고리즘으로 암호화함
-            pDTO.setPassword(EncryptUtill.encHashSHA256(password));
+            pDTO.setPassword(EncryptUtil.encHashSHA256(password));
 
             // 민감 정보인 이메일은 AES128-CBC로 암호화함
-            pDTO.setEmail(EncryptUtill.encAES128CBC(email));
+            pDTO.setEmail(EncryptUtil.encAES128CBC(email));
             pDTO.setAddr1(addr1);
             pDTO.setAddr2(addr2);
 
@@ -229,7 +227,7 @@ public class UserInfoController {
             pDTO.setUserId(userId);
 
             // 비밀번호 절대로 복호화되지 않도록 해시 알고리즘으로 암호화함
-            pDTO.setPassword(EncryptUtill.encHashSHA256(password));
+            pDTO.setPassword(EncryptUtil.encHashSHA256(password));
 
             // 로그인을 위해 아이디와 비밀번호가 일치하는지 확인하기 위한 userInfoService 호출하기
             UserInfoDTO rDTO = userInfoService.getLogin(pDTO);
@@ -335,7 +333,7 @@ public class UserInfoController {
 
         UserInfoDTO pDTO = new UserInfoDTO();
         pDTO.setUserName(userName);
-        pDTO.setEmail(EncryptUtill.encAES128CBC(email));
+        pDTO.setEmail(EncryptUtil.encAES128CBC(email));
 
         UserInfoDTO rDTO = Optional.ofNullable(userInfoService.searchUserIdOrPasswordProc(pDTO))
                 .orElseGet(UserInfoDTO::new);   // 아이디 찾기
@@ -398,7 +396,7 @@ public class UserInfoController {
         UserInfoDTO pDTO = new UserInfoDTO();
         pDTO.setUserId(userId);
         pDTO.setUserName(userName);
-        pDTO.setEmail(EncryptUtill.encAES128CBC(email));
+        pDTO.setEmail(EncryptUtil.encAES128CBC(email));
 
         // 비밀번호 찾기 가능한지 확인하기
         UserInfoDTO rDTO = Optional.ofNullable(userInfoService.searchUserIdOrPasswordProc(pDTO)).orElseGet(UserInfoDTO::new);
@@ -453,7 +451,7 @@ public class UserInfoController {
 
             UserInfoDTO pDTO = new UserInfoDTO();
             pDTO.setUserId(newPassword);
-            pDTO.setPassword(EncryptUtill.encHashSHA256(password));
+            pDTO.setPassword(EncryptUtil.encHashSHA256(password));
 
             userInfoService.newPasswordProc(pDTO);
 

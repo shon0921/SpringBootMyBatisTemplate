@@ -7,7 +7,7 @@ import kopo.poly.service.IMailService;
 import kopo.poly.service.IUserinfoService;
 import kopo.poly.util.CmmUtil;
 import kopo.poly.util.DateUtil;
-import kopo.poly.util.EncryptUtill;
+import kopo.poly.util.EncryptUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -61,7 +61,7 @@ public class UserInfoService implements IUserinfoService {
 
         dto.setTitle("이메일 중복 확인 인증번호 발송 메일");
         dto.setContents("인증번호는 "+authNumber+" 입니다.");
-        dto.setToMail(EncryptUtill.decAES128CBC(CmmUtil.nvl(pDTO.getEmail())));
+        dto.setToMail(EncryptUtil.decAES128CBC(CmmUtil.nvl(pDTO.getEmail())));
 
         mailService.doSendMail(dto);    // 이메일 발송
 
@@ -97,7 +97,7 @@ public class UserInfoService implements IUserinfoService {
             MailDTO mDTO = new MailDTO();
 
             // 회원정보화면에서 입력받은 이메일 변수(아직 암호화되어 넘어오기 때문에 복호화 수행함)
-            mDTO.setToMail(EncryptUtill.decAES128CBC(CmmUtil.nvl(pDTD.getEmail())));
+            mDTO.setToMail(EncryptUtil.decAES128CBC(CmmUtil.nvl(pDTD.getEmail())));
 
             mDTO.setTitle("회원가입을 축하드립니다."); // 제목
 
@@ -148,7 +148,7 @@ public class UserInfoService implements IUserinfoService {
             MailDTO mDTO = new MailDTO();
 
             // 아이디, 패스워드 일치하는지 체크하는 쿼리에서 이메일 값 받아오기(아직 암호화되어 넘어오기 때문에 복호화 수행함)
-            mDTO.setToMail(EncryptUtill.decAES128CBC(CmmUtil.nvl(rDTO.getEmail())));
+            mDTO.setToMail(EncryptUtil.decAES128CBC(CmmUtil.nvl(rDTO.getEmail())));
 
             mDTO.setTitle("로그인 알림!");   //제목
 
