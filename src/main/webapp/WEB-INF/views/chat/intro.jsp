@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>채팅방 입장 및 채팅 리스트</title>
-    <link rel="stylesheet" href="/css/table.css"/>
+    <link rel="stylesheet" href="/css/table.css">
     <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
 

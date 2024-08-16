@@ -57,7 +57,7 @@ public class ChatHandler extends TextWebSocketHandler {
                     //{"name":"이협건","msg":"ㅇㅎ","date":2022. 7. 25. 오전 9:30:57"}
                     ChatDTO cDTO = new ChatDTO();
                     cDTO.setName("관리자");
-                    cDTO.setMsg(userName + "님이 "+roomName+" 채팅방에 퇴장하셨습니다.");
+                    cDTO.setMsg(userName + "님이 "+roomName+" 채팅방에 입장하셨습니다.");
                     cDTO.setDate(DateUtil.getDateTime("yyyy-MM-dd hh:mm:ss"));
 
                     String json = new ObjectMapper().writeValueAsString(cDTO);
@@ -84,7 +84,7 @@ public class ChatHandler extends TextWebSocketHandler {
         }
 
 
-        log.info(this.getClass().getName() + ".afterConnectionClosed End!");
+        log.info(this.getClass().getName() + ".afterConnectionEstablished End!");
     }
     /*
         클라이언트가 접속 해제 시 호출되는 메서드
@@ -173,6 +173,7 @@ public class ChatHandler extends TextWebSocketHandler {
 
                     TextMessage chatMsg = new TextMessage(json);
                     s.sendMessage(chatMsg);
+
                 } catch (IOException e) {
                     log.info("Error : " +e);
                 }

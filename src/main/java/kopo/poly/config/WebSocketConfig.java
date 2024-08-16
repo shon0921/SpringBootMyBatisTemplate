@@ -28,7 +28,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         log.info("WebSocket Execute!!!");
 
-        registry.addHandler(chatHandler, "/ws/*/*/*")
+        registry.addHandler(chatHandler, "/ws/*/*")
                 .setAllowedOrigins("*")
                 .addInterceptors(
                         new HttpSessionHandshakeInterceptor() {
